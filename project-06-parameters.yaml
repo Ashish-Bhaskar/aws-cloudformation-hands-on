@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Project 06 - Reusable CloudFormation Template
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - staging
+      - prod
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      Tags:
+        - Key: Environment
+          Value: !Ref EnvironmentName
+
+Outputs:
+  BucketName:
+    Description: Created S3 bucket name
+    Value: !Ref MyS3Bucket
+
+  Environment:
+    Description: Selected environment
+    Value: !Ref EnvironmentName

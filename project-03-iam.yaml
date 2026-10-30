@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Project 03 - IAM Role using CloudFormation
+
+Resources:
+  MyLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: iac-lab-03-lambda-role
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+Outputs:
+  RoleARN:
+    Description: ARN of the created IAM role
+    Value: !GetAtt MyLambdaRole.Arn
